@@ -1,12 +1,16 @@
-pipeline{
-    agent any
-
-    stages{
-      stage('Dep install') {
-        agent {docker { image 'nodejs' }}
-        steps{
-            sh 'npm install'
+pipeline {
+    agent {
+        docker { 
+            image 'node:latest' 
+            label 'docker' 
         }
-      }   
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                sh 'node --version'
+            }
+        }
     }
 }
